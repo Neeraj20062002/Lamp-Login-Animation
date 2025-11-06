@@ -1,14 +1,192 @@
 :root {
+  --bg: #0d1117;
   --glow-color: #00ffcc;
+  --lamp-width: 360px;
 }
 
+/* base reset */
+* {
+  box-sizing: border-box;
+}
+html,
 body {
-  background-color: #0d1117;
-  color: #fff;
-  font-family: "Poppins", sans-serif;
+  height: 100%;
+  margin: 0;
+}
+body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: #eaf6f3;
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+/* layout */
+.container {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Lamp wrapper */
+.lamp {
+  position: relative;
+  width: var(--lamp-width);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  cursor: pointer;
+  outline: none;
+}
+
+/* lamp image - allow it to be clicked */
+.lamp-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* glow (hidden by default) */
+.lamp-glow {
+  position: absolute;
+  left: 50%;
+  top: 6%;
+  transform: translateX(-50%) scale(0.95);
+  width: 64%;
+  height: 60%;
+  border-radius: 50%;
+  filter: blur(28px);
+  opacity: 0;
+  transition: opacity 320ms ease, transform 320ms ease;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(0, 255, 204, 0.9) 0%,
+    rgba(0, 255, 204, 0.22) 35%,
+    rgba(0, 0, 0, 0) 75%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* lamp ON glow */
+.lamp.on .lamp-glow {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* LOGIN CARD (styled + NEON GLOW) */
+.login-container {
+  width: 360px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transform: translateY(12px) scale(0.995);
+  pointer-events: none;
+  transition: opacity 360ms ease, transform 360ms ease, box-shadow 360ms ease;
+}
+
+/* Show login when lamp.on is active + apply glowing neon border */
+.lamp.on ~ .login-container,
+.lamp.on + .login-container {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  border: 1px solid rgba(0, 255, 204, 0.35);
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.25), 0 0 24px rgba(0, 255, 204, 0.18),
+    0 0 48px rgba(0, 255, 204, 0.1);
+}
+
+/* Form styling */
+.login-form h2 {
+  margin: 0 0 18px 0;
+  font-size: 1.85rem;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0, 255, 204, 0.08);
+  color: #eaf6f3;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #9aa4a6;
+  margin-bottom: 6px;
+}
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  color: #eaf6f3;
+  outline: none;
+  transition: all 0.25s ease;
+}
+.form-group input:focus {
+  box-shadow: 0 6px 30px rgba(0, 255, 204, 0.06);
+  border-color: rgba(0, 255, 204, 0.35);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 255, 204, 0.95),
+    rgba(0, 220, 190, 0.95)
+  );
+  color: #01221a;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+}
+.form-footer {
+  margin-top: 12px;
+  text-align: center;
+}
+.forgot-link {
+  color: #9aa4a6;
+  text-decoration: none;
+}
+
+/* accessibility focus styling for the lamp */
+.lamp:focus {
+  box-shadow: 0 0 0 6px rgba(0, 255, 204, 0.08);
+  border-radius: 8px;
+}
+
+/* responsive */
+@media (max-width: 860px) {
+  .container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .lamp {
+    order: 0;
+  }
+  .login-container {
+    order: 1;
+    width: 92%;
+  }
 }

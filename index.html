@@ -2,20 +2,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Lamp Login Animation</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <div class="container">
-        <div class="lamp">
-            <img src="lamp.png" alt="Lamp" />
+        <!-- Lamp block: clicking this toggles the lamp -->
+        <div class="lamp" id="lamp" role="button" tabindex="0" aria-pressed="false" aria-label="Toggle lamp">
+            <div class="lamp-glow" aria-hidden="true"></div>
+
+            <!-- artwork (must be lamp.png in same folder) -->
+            <img src="lamp.png" alt="Lamp" class="lamp-img" />
+
+            <!-- no extra string elements — PNG provides the visual string -->
         </div>
 
-        <div class="login-container">
-            <form class="Login_form">
+        <!-- Login form: hidden by default; shows only when lamp has "on" -->
+        <div class="login-container" id="loginContainer" aria-hidden="true">
+            <form class="login-form" onsubmit="return false;">
                 <h2>Welcome Back</h2>
 
                 <div class="form-group">
@@ -29,20 +36,14 @@
                 </div>
 
                 <button class="login-btn">Login</button>
-                <div class="form_footer">
-                    <a href="#" class="forgot-Link">Forgot Password?</a>
+                <div class="form-footer">
+                    <a href="#" class="forgot-link">Forgot Password?</a>
                 </div>
             </form>
         </div>
     </div>
 
-    <form class="radio-controls">
-        <input type="radio" id="on" name="status" value="on" />
-        <label for="on">On</label>
-
-        <input type="radio" id="off" name="status" value="off" />
-        <label for="off">Off</label>
-    </form>
+    <script src="main.js"></script>
 </body>
 
 </html>
