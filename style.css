@@ -1,0 +1,14 @@
+:root {
+  --glow-color: #00ffcc;
+}
+
+body {
+  background-color: #0d1117;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
